@@ -41,23 +41,23 @@
   </style>
 {% endblock %}
 {% block content %}
-      <h1>Restaurants</h1>
+      <h1>ORDERS</h1>
 
       {% if True %}
           <table class="table">
               <thead>
                   <tr>
                       <th>Name</th>
-                      <th>Rating</th>
+                      <th>Total</th>
                       <th class="text-end">Details</th>
                   </tr>
               </thead>
               <tbody>
-                  {% for restaurant in restaurants %}
+                  {% for order in orders %}
                       <tr>
-                          <td>{{ restaurant.name }}</td>
-                          <td>{% include "star_rating.html" %}</td>
-                          <td class="text-end"><a href="{{ url_for('details', id=restaurant.id) }}" class="btn btn-sm btn-primary">Details</a></td>
+                          <td>{{ order.name }}</td>
+                          <td>{{ order.total_bill }}</td>
+                          <td class="text-end"><a href="{{ url_for('details', id=order.id) }}" class="btn btn-sm btn-primary">Details</a></td>
                       </tr>
                   {% endfor %}
               </tbody>
@@ -65,8 +65,47 @@
       {% else %}
           <p>No restaurants exist.  Select Add new restaurant to add one.</p>
       {% endif %}
+      
+      <!-- <div class="d-flex justify-content-between align-items-center">
+        <button class="btn btn-danger">Reset</button>
+        <a href="{{ url_for('create_restaurant') }}" class="btn btn-success">Add new Order</a>
+      </div> -->
 
-      <div class="d-flex justify-content-end">
-              <a href="{{ url_for('create_restaurant') }}" class="btn btn-success px-4 gap-3">Add new restaurant</a>
+      <div class="d-flex justify-content-between align-items-center">
+        <!-- Reset Form -->
+        <form action="{{ url_for('reset_restaurants') }}" method="POST" style="margin: 0;" onsubmit="return confirmReset(event, this);">
+            <button type="submit" class="btn btn-danger">Reset</button>
+        </form>
+    
+        <!-- Add New Order Button -->
+        <a href="{{ url_for('create_restaurant') }}" class="btn btn-success">Add new Order</a>
       </div>
+    
+    <!-- SweetAlert2 Script -->
+      <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    
+      <script>
+        function confirmReset(event, form) {
+            event.preventDefault(); // Prevent the form from submitting immediately
+            Swal.fire({
+                title: 'Are you sure?',
+                text: "This action will delete all orders permanently!",
+                icon: 'warning',
+                showCancelButton: true,
+                confirmButtonColor: '#d33',
+                cancelButtonColor: '#3085d6',
+                confirmButtonText: 'Yes, delete it!',
+                cancelButtonText: 'Cancel'
+            }).then((result) => {
+                if (result.isConfirmed) {
+                    // If confirmed, submit the form
+                    form.submit();
+                }
+            });
+        }
+      </script>
+    
+    
+    
+      
 {% endblock %}

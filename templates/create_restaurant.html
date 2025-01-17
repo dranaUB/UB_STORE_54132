@@ -10,7 +10,7 @@
   </style>
 {% endblock %}
 {% block content %}
-    <h1>Add New Restaurant</h1>
+    <h1>Add New Order</h1>
 
     <form method="POST" action="{{ url_for('add_restaurant') }}">
         <div class="mb-3">
@@ -22,7 +22,7 @@
           <input type="text" class="form-control" id="street_address" name="street_address">
         </div>
         <div class="mb-3">
-            <label for="description" class="form-label">Description</label>
+            <label for="description" class="form-label">Phone Number</label>
             <input type="text" class="form-control" id="description" name="description">
         </div>
         <button type="submit" class="btn btn-primary">Submit</button>
