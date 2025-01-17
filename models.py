@@ -19,7 +19,7 @@ class Review(db.Model):
     restaurant = Column(Integer, ForeignKey('restaurant.id', ondelete="CASCADE"))
     user_name = Column(String(30))
     rating = Column(Integer)
-    review_text = Column(Integer)
+    review_text = Column(String(250))
     review_date = Column(DateTime)
     price=Column(Integer)
 
