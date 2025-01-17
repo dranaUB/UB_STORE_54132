@@ -30,7 +30,7 @@ def upgrade():
     sa.Column('restaurant', sa.Integer(), nullable=True),
     sa.Column('user_name', sa.String(length=30), nullable=True),
     sa.Column('rating', sa.Integer(), nullable=True),
-    sa.Column('review_text', sa.Integer(), nullable=True),
+    sa.Column('review_text', sa.String(length=250), nullable=True),
     sa.Column('review_date', sa.DateTime(), nullable=True),
     sa.Column('price', sa.Integer(), nullable=False),
     sa.ForeignKeyConstraint(['restaurant'], ['restaurant.id'], ondelete='CASCADE'),
